@@ -1,0 +1,17 @@
+0b7126e0c6e86d3ec295a72f5aa6e0bd
+::res://::1669367296
+export_presets.cfg::TextFile::-1::1669313420::0::1::::<><>::
+icon.svg::CompressedTexture2D::3443437897288440787::1669241783::1669241787::1::::<><>::
+::res://Assets/::1669367282
+crosshair.png::CompressedTexture2D::8397306872423868669::1669250274::1669367281::1::::<><>::
+crosshair.svg::CompressedTexture2D::8470771745331163626::1669250803::1669367282::1::::<><>::
+::res://Builds/::1669367296
+::res://Scenes/::1669367281
+crosshair.tscn::PackedScene::-1::1669367281::0::1::::<><>::uid://dsxkmximvplhi
+Engine.tscn::PackedScene::-1::1669367273::0::1::::<><>::res://Scripts/Engine.gd<>uid://bpca6ipmbgptr
+Lander.tscn::PackedScene::-1::1669367273::0::1::::<><>::res://Scripts/Lander.gd<>uid://dr4pt8wvgs0ye<>uid://5onxah1hhpvc
+Main.tscn::PackedScene::-1::1669367263::0::1::::<><>::uid://bpca6ipmbgptr<>res://Scenes/Lander.tscn
+ui.tscn::PackedScene::2195853621289593350::1669367247::0::1::::<><>::
+::res://Scripts/::1669367297
+Engine.gd::GDScript::-1::1669312358::0::1::::LanderEngine<>Node2D<>::
+Lander.gd::GDScript::-1::1669367297::0::1::::Lander<>RigidBody2D<>::

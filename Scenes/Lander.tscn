@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
+[ext_resource type="PackedScene" uid="uid://dr4pt8wvgs0ye" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
+[ext_resource type="PackedScene" uid="uid://5onxah1hhpvc" path="res://Scenes/Engine.tscn" id="3_acvr4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
+radius = 19.0
+height = 68.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yswy8"]
+
+[node name="Lander" type="RigidBody2D"]
+mass = 1.2
+script = ExtResource("1_pxt74")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v8fb4")
+debug_color = Color(0.486275, 0.701961, 0, 0.419608)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(58.0658, 34)
+mesh = SubResource("SphereMesh_yswy8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2(0.7, 0.7)
+
+[node name="Crosshair" parent="." instance=ExtResource("2_h5om2")]
+unique_name_in_owner = true
+visible = false
+
+[node name="EngineUp" parent="." instance=ExtResource("3_acvr4")]
+position = Vector2(0, 20)
+max_thrust = 800.0
+action = "thrust_up"
+
+[node name="EngineLeft" parent="." instance=ExtResource("3_acvr4")]
+position = Vector2(-35, 0)
+max_thrust = 400.0
+action = "thrust_right"
+acceleration = 0.4
+
+[node name="EngineRight" parent="." instance=ExtResource("3_acvr4")]
+position = Vector2(35, 1)
+max_thrust = 400.0
+action = "thrust_left"
+acceleration = 0.4

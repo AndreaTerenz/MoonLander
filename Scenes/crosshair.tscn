@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dsxkmximvplhi" path="res://Assets/crosshair.svg" id="1_hbi4x"]
+
+[sub_resource type="GDScript" id="GDScript_5hro0"]
+script/source = "extends Sprite2D
+
+@onready var line := $Line2D
+
+func _process(delta):
+	self.global_position = get_global_mouse_position()
+	
+	var point0 : Vector2 = to_local(self.get_parent().global_position)
+	var point1 : Vector2 = Vector2.ZERO
+	
+	line.points = [point0, point1]
+"
+
+[sub_resource type="Curve" id="Curve_txwin"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Crosshair" type="Sprite2D"]
+top_level = true
+scale = Vector2(0.0372093, 0.0372093)
+texture = ExtResource("1_hbi4x")
+script = SubResource("GDScript_5hro0")
+
+[node name="Line2D" type="Line2D" parent="."]
+show_behind_parent = true
+points = PackedVector2Array(1500, 0, 0, 0)
+width = 200.0
+width_curve = SubResource("Curve_txwin")
+default_color = Color(1, 0.92549, 0, 1)
+begin_cap_mode = 1
