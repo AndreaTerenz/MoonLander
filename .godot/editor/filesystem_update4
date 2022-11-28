@@ -1,5 +1,8 @@
 res://Scenes/Main.tscn
 res://Scenes/Lander.tscn
-res://Scripts/Engine.gd
-res://Scripts/Icecream.gd
 res://Scenes/Engine.tscn
+res://Scenes/bullet.tscn
+res://Scripts/Bullet.gd
+res://Scenes/Gun.tscn
+res://Scripts/Gun.gd
+res://Scenes/crosshair.tscn

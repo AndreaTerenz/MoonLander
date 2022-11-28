@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://qp1usuvfujom"]
+[gd_scene load_steps=7 format=3 uid="uid://qp1usuvfujom"]
 
 [ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
-[ext_resource type="PackedScene" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
+[ext_resource type="PackedScene" uid="uid://dudvkm16je5nc" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
 [ext_resource type="PackedScene" uid="uid://b73djaua5h7l6" path="res://Scenes/Engine.tscn" id="3_acvr4"]
+[ext_resource type="PackedScene" uid="uid://ctm8dcvxvhoq0" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
 radius = 19.0
@@ -29,7 +30,6 @@ zoom = Vector2(0.7, 0.7)
 
 [node name="Crosshair" parent="." instance=ExtResource("2_h5om2")]
 unique_name_in_owner = true
-visible = false
 
 [node name="EngineUp" parent="." instance=ExtResource("3_acvr4")]
 position = Vector2(0, 20)
@@ -71,3 +71,6 @@ position = Vector2(35, 1)
 max_thrust = 400.0
 action = "thrust_left"
 acceleration = 0.4
+
+[node name="Gun" parent="." instance=ExtResource("4_uwbsx")]
+rps = 201.0

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://be6h06lv03ice"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_vp3gj"]
+
+[sub_resource type="Gradient" id="Gradient_sma5d"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cimdg"]
+gradient = SubResource("Gradient_sma5d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_grju2"]
+radius = 6.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bpyb4"]
+radius = 4.61
+height = 26.585
+
+[node name="Bullet" type="RigidBody2D"]
+mass = 0.1
+gravity_scale = 0.0
+script = ExtResource("1_vp3gj")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.14902, 1)
+energy = 5.31
+texture = SubResource("GradientTexture2D_cimdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CapsuleShape2D_grju2")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
+modulate = Color(1, 1, 0.0627451, 1)
+mesh = SubResource("CapsuleMesh_bpyb4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

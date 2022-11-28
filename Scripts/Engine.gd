@@ -46,7 +46,6 @@ func _process(delta):
 		var thrust_vector = (thrust_target.global_position - self.global_position).normalized()
 		
 		current_thrust = get_thrust()
-		IC.ic("%s | %s | %s", [name, thrust_vector, thrust_vector.angle()])
 		parent_ship.apply_force(thrust_vector * current_thrust, offset)
 		
 		db_tex.look_at(thrust_target.global_position)
