@@ -13,7 +13,7 @@ extends Node2D
 var parent_ship : Lander = null
 
 func _ready():
-	timer.wait_time = IC.ic(1.0 / rps)
+	timer.wait_time = (1.0 / rps)
 	timer.one_shot = true
 	
 	var p = get_parent()
@@ -33,7 +33,7 @@ func _process(delta):
 		var target_dist = global_position.distance_squared_to(target)
 		var angle = rotation
 		
-		angle += remap(randf(), 0., 1., -1., 1.) * max_spread/2.z * PI/3.
+		angle += remap(randf(), 0., 1., -1., 1.) * max_spread/2. * PI/3.
 		
 		target.x = target_dist * cos(angle)
 		target.y = target_dist * sin(angle)
