@@ -23,11 +23,17 @@ _global_script_classes=[{
 "class": &"LanderEngine",
 "language": &"GDScript",
 "path": "res://Scripts/Engine.gd"
+}, {
+"base": "Node2D",
+"class": &"LanderGun",
+"language": &"GDScript",
+"path": "res://Scripts/Gun.gd"
 }]
 _global_script_class_icons={
 "Bullet": "",
 "Lander": "",
-"LanderEngine": ""
+"LanderEngine": "",
+"LanderGun": ""
 }
 
 [application]
@@ -40,6 +46,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 IC="*res://Scripts/Icecream.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 

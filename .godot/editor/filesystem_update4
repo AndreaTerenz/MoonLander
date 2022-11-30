@@ -4,4 +4,7 @@ res://Scenes/Engine.tscn
 res://Scenes/Gun.tscn
 res://Scenes/crosshair.tscn
 res://Scenes/bullet.tscn
+res://Scripts/Globals.gd
+res://Scripts/Lander.gd
+res://Scripts/Engine.gd
 res://Scripts/Gun.gd

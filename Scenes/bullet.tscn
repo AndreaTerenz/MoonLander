@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_vp3gj"]
 
-[sub_resource type="Gradient" id="Gradient_sma5d"]
+[sub_resource type="Gradient" id="Gradient_qby4e"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_cimdg"]
-gradient = SubResource("Gradient_sma5d")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ou8kx"]
+gradient = SubResource("Gradient_qby4e")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.2)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_grju2"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ttfjg"]
 radius = 6.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_bpyb4"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eg4go"]
 radius = 4.61
 height = 26.585
 
@@ -26,14 +26,14 @@ script = ExtResource("1_vp3gj")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(1, 1, 0.14902, 1)
 energy = 5.31
-texture = SubResource("GradientTexture2D_cimdg")
+texture = SubResource("GradientTexture2D_ou8kx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.4, 0.4)
-shape = SubResource("CapsuleShape2D_grju2")
+shape = SubResource("CapsuleShape2D_ttfjg")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
 modulate = Color(1, 1, 0.0627451, 1)
-mesh = SubResource("CapsuleMesh_bpyb4")
+mesh = SubResource("CapsuleMesh_eg4go")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
