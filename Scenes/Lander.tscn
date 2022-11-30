@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://qp1usuvfujom"]
+[gd_scene load_steps=8 format=3 uid="uid://qp1usuvfujom"]
 
 [ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
 [ext_resource type="PackedScene" uid="uid://dudvkm16je5nc" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
 [ext_resource type="PackedScene" uid="uid://b73djaua5h7l6" path="res://Scenes/Engine.tscn" id="3_acvr4"]
 [ext_resource type="PackedScene" uid="uid://ctm8dcvxvhoq0" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
+[ext_resource type="PackedScene" uid="uid://cesqqwhxmq6a6" path="res://Scenes/UI.tscn" id="5_k18oc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
 radius = 19.0
@@ -33,44 +34,48 @@ unique_name_in_owner = true
 
 [node name="EngineUp" parent="." instance=ExtResource("3_acvr4")]
 position = Vector2(0, 20)
-max_thrust = 800.0
 action = "thrust_up"
-
-[node name="EngineRoll_L_1" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(-29, -16)
-thrust_vec_override = Vector2(0, 1)
-max_thrust = 80.0
-action = "roll_left"
+max_thrust = 800.0
 
 [node name="EngineRoll_R_1" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(29, -16)
+position = Vector2(-29, -16)
+action = "roll_right"
 thrust_vec_override = Vector2(0, 1)
 max_thrust = 80.0
-action = "roll_right"
 
-[node name="EngineRoll_L_2" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(29, 16)
-thrust_vec_override = Vector2(0, -1)
-max_thrust = 80.0
+[node name="EngineRoll_L_1" parent="." instance=ExtResource("3_acvr4")]
+position = Vector2(29, -16)
 action = "roll_left"
+thrust_vec_override = Vector2(0, 1)
+max_thrust = 80.0
 
 [node name="EngineRoll_R_2" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(-29, 16)
+position = Vector2(29, 16)
+action = "roll_right"
 thrust_vec_override = Vector2(0, -1)
 max_thrust = 80.0
-action = "roll_right"
+
+[node name="EngineRoll_L_2" parent="." instance=ExtResource("3_acvr4")]
+position = Vector2(-29, 16)
+action = "roll_left"
+thrust_vec_override = Vector2(0, -1)
+max_thrust = 80.0
 
 [node name="EngineLeft" parent="." instance=ExtResource("3_acvr4")]
 position = Vector2(-35, 0)
-max_thrust = 400.0
 action = "thrust_right"
+max_thrust = 400.0
 acceleration = 0.4
 
 [node name="EngineRight" parent="." instance=ExtResource("3_acvr4")]
 position = Vector2(35, 1)
-max_thrust = 400.0
 action = "thrust_left"
+max_thrust = 400.0
 acceleration = 0.4
 
 [node name="Gun" parent="." instance=ExtResource("4_uwbsx")]
 rps = 201.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("5_k18oc")]

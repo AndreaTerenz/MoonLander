@@ -1,10 +1,10 @@
 class_name LanderGun
-extends Node2D
+extends LanderModule
+
+signal out_of_ammo(gun)
 
 @onready var muzzle := %Muzzle
-@onready var timer := %Timer
 
-@export var enabled := true
 @export var muzzle_velocity = 10000.
 @export var autofire := true
 # rounds per second
@@ -13,20 +13,18 @@ extends Node2D
 @export var max_ammo := 1000.
 @export var bullet_scn = preload("res://Scenes/bullet.tscn")
 
-var parent_ship : Lander = null
+var timer : Timer = null
 var current_ammo_count := max_ammo
 
-func _ready():
-	var p = get_parent()
+func setup(p: Lander):
+	super.setup(p)
 	
-	if p is Lander:
-		await p.ready
-		
-		parent_ship = p
-		parent_ship.add_gun(self)
-		
-		timer.wait_time = (1.0 / rps)
-		timer.one_shot = true
+	parent_ship.add_gun(self)
+	
+	timer = Timer.new()
+	timer.one_shot = true
+	
+	add_child(timer)
 
 func _process(delta):
 	var target = get_global_mouse_position()
@@ -48,7 +46,10 @@ func _process(delta):
 		b.shoot(target, muzzle_velocity, muzzle.global_position, get_tree().root)
 		current_ammo_count -= 1
 		
-		timer.start()
+		if current_ammo_count <= 0:
+			out_of_ammo.emit(self)
+		
+		timer.start(1. / rps)
 		
 func can_shoot():
 	enabled = enabled and (current_ammo_count > 0)

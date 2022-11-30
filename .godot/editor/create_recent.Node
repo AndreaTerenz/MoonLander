@@ -1,3 +1,11 @@
+ProgressBar
+HBoxContainer
+Label
+VBoxContainer
+MarginContainer
+CanvasLayer
+GridContainer
+PanelContainer
 Timer
 Marker2D
 Sprite2D
@@ -11,11 +19,8 @@ Camera2D
 SubViewport
 SubViewportContainer
 Node2D
-VBoxContainer
-Label
 ScrollContainer
 TextureRect
-CanvasLayer
 Line2D
 Control
 GPUParticles2D

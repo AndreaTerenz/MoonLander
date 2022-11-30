@@ -19,21 +19,27 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Scripts/Lander.gd"
 }, {
-"base": "Node2D",
+"base": "LanderModule",
 "class": &"LanderEngine",
 "language": &"GDScript",
 "path": "res://Scripts/Engine.gd"
 }, {
-"base": "Node2D",
+"base": "LanderModule",
 "class": &"LanderGun",
 "language": &"GDScript",
 "path": "res://Scripts/Gun.gd"
+}, {
+"base": "Node2D",
+"class": &"LanderModule",
+"language": &"GDScript",
+"path": "res://Scripts/LanderModule.gd"
 }]
 _global_script_class_icons={
 "Bullet": "",
 "Lander": "",
 "LanderEngine": "",
-"LanderGun": ""
+"LanderGun": "",
+"LanderModule": ""
 }
 
 [application]
@@ -107,3 +113,7 @@ shoot={
 [physics]
 
 2d/default_gravity=450.0
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.0980392, 0.0980392, 0.0980392, 1)
