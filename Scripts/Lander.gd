@@ -38,3 +38,34 @@ func _on_outta_fuel(engine: LanderEngine):
 
 func _on_outta_ammo(gun: LanderGun):
 	pass
+	
+func collect_fuel(amount: float):
+	var delta_tot := INF
+	var fuel_left : float = amount
+	var deltas : Array[float] = []
+	var rel_deltas : Array[float] = []
+	var allotted : Array[float] = []
+	var engine_count := len(engines)
+	
+	deltas.resize(engine_count)
+	rel_deltas.resize(engine_count)
+	allotted.resize(engine_count)
+	
+	while (fuel_left > 0) and (delta_tot > 0):
+		delta_tot = 0
+		
+		for i in range(engine_count):
+			deltas[i] = engines[i].tank_level_missing
+			delta_tot += deltas[i]
+		print(delta_tot)
+			
+		for i in range(engine_count):
+			# normalization
+			rel_deltas[i] = deltas[i] / delta_tot
+			allotted[i] = min(rel_deltas[i] * fuel_left, deltas[i])
+			engines[i].tank_level += allotted[i]
+			print(engines[i].name, " ", rel_deltas[i], " ", allotted[i])
+		
+		fuel_left = 0
+		for i in range(engine_count):
+			fuel_left += float(max(allotted[i] - deltas[i], 0.))

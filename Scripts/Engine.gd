@@ -29,6 +29,9 @@ var tank_level = tank_capacity
 var tank_level_ratio :
 	get:
 		return tank_level/tank_capacity
+var tank_level_missing :
+	get:
+		return tank_capacity-tank_level
 
 func setup(p: Lander):
 	super.setup(p)
