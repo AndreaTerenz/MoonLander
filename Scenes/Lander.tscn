@@ -39,6 +39,7 @@ unique_name_in_owner = true
 position = Vector2(0, 20)
 action = "thrust_up"
 max_thrust = 800.0
+max_tank_consumption = 8.0
 
 [node name="EngineRoll_R_1" parent="." instance=ExtResource("3_acvr4")]
 position = Vector2(-29, -16)
@@ -77,7 +78,13 @@ max_thrust = 400.0
 acceleration = 0.4
 
 [node name="Gun" parent="." instance=ExtResource("4_uwbsx")]
+muzzle_velocity = null
+autofire = null
 rps = 201.0
+max_spread = null
+max_ammo = null
+bullet_scn = null
+enabled = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

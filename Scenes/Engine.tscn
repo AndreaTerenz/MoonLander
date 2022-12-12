@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b73djaua5h7l6"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Engine.gd" id="1_06yq6"]
+[ext_resource type="Script" path="res://Scripts/Modules/Engine.gd" id="1_06yq6"]
 [ext_resource type="Texture2D" uid="uid://bpca6ipmbgptr" path="res://icon.svg" id="2_plver"]
 
 [sub_resource type="Gradient" id="Gradient_1k8np"]

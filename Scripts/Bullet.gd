@@ -19,7 +19,7 @@ func _ready():
 		remove()
 	)
 
-func shoot(target : Vector2, speed : float, muzzle_pos : Vector2, tree_root: Node):
+func shoot(target : Vector2, speed : float, muzzle_pos : Vector2, tree_root: Node, initial_vel : Vector2):
 	tree_root.add_child(self)
 	global_position = muzzle_pos
 	
@@ -32,6 +32,9 @@ func shoot(target : Vector2, speed : float, muzzle_pos : Vector2, tree_root: Nod
 	look_at(target)
 	rotate(PI/2)
 	apply_central_force(dir.normalized() * speed)
+	
+	if initial_vel.length_squared() != 0.:
+		linear_velocity += initial_vel
 	
 	fuze.start()
 

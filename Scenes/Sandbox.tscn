@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsmo7jj02jh3s"]
+[gd_scene load_steps=6 format=3 uid="uid://bsmo7jj02jh3s"]
 
 [ext_resource type="Texture2D" uid="uid://bpca6ipmbgptr" path="res://icon.svg" id="1_660rl"]
 [ext_resource type="PackedScene" uid="uid://qp1usuvfujom" path="res://Scenes/Lander.tscn" id="1_puq72"]
 [ext_resource type="PackedScene" uid="uid://wu1r2spn1kcr" path="res://Scenes/Pickups/Fuel.tscn" id="3_c2imb"]
+[ext_resource type="PackedScene" uid="uid://cast2ilxpqv51" path="res://Scenes/Pickups/Ammo.tscn" id="4_ncjfd"]
 
 [sub_resource type="GDScript" id="GDScript_iyksl"]
 script/source = "extends Node2D
@@ -103,10 +104,11 @@ texture = ExtResource("1_660rl")
 polygon = PackedVector2Array(63, -60.2, 63, -57.7, 64, -56.4, 64, 56.2, 62.4, 61, 60.6, 61, 56.4, 64, -56.8, 64, -63, 60.1, -63, 57.7, -64, 56.4, -64, -55.4, -60.2, -63, -57.5, -63, -55.6, -64, 55.4, -64)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_scale = 0.8
+scroll_base_scale = Vector2(0.8, 0.8)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(2760, 591)
-motion_scale = Vector2(0.8, 0.8)
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
@@ -121,3 +123,6 @@ texture = ExtResource("1_660rl")
 [node name="Fuel" parent="." instance=ExtResource("3_c2imb")]
 position = Vector2(1302, 659)
 amount = 8000.0
+
+[node name="Ammo" parent="." instance=ExtResource("4_ncjfd")]
+position = Vector2(1163, 633)

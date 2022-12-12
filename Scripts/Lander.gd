@@ -40,32 +40,42 @@ func _on_outta_ammo(gun: LanderGun):
 	pass
 	
 func collect_fuel(amount: float):
-	var delta_tot := INF
-	var fuel_left : float = amount
+	collect_resource(amount, engines)
+
+func collect_ammo(amount: float):
+	collect_resource(amount, guns)
+
+func collect_resource(initial_amount : float, modules: Array):
 	var deltas : Array[float] = []
+	var count := len(modules)
+	deltas.resize(count)
+		
+	var delta_tot : float = 0.
+	var amount_left : float = initial_amount
 	var rel_deltas : Array[float] = []
 	var allotted : Array[float] = []
-	var engine_count := len(engines)
 	
-	deltas.resize(engine_count)
-	rel_deltas.resize(engine_count)
-	allotted.resize(engine_count)
-	
-	while (fuel_left > 0) and (delta_tot > 0):
-		delta_tot = 0
+	rel_deltas.resize(count)
+	allotted.resize(count)
 		
-		for i in range(engine_count):
-			deltas[i] = engines[i].tank_level_missing
-			delta_tot += deltas[i]
-		print(delta_tot)
-			
-		for i in range(engine_count):
+	for i in range(count):
+		deltas[i] = modules[i].get_resource_delta()
+		delta_tot += deltas[i]
+		allotted[i] = 0.
+		
+	while (amount_left > 0) and (delta_tot > 0):
+		var all_tot = 0.
+		
+		for i in range(count):
 			# normalization
 			rel_deltas[i] = deltas[i] / delta_tot
-			allotted[i] = min(rel_deltas[i] * fuel_left, deltas[i])
-			engines[i].tank_level += allotted[i]
-			print(engines[i].name, " ", rel_deltas[i], " ", allotted[i])
-		
-		fuel_left = 0
-		for i in range(engine_count):
-			fuel_left += float(max(allotted[i] - deltas[i], 0.))
+			var new_allotted = float(min(rel_deltas[i] * amount_left, deltas[i]))
+			allotted[i] += (new_allotted)
+			deltas[i] -= new_allotted
+			all_tot += (new_allotted)
+			
+		amount_left -= all_tot
+		delta_tot -= all_tot
+			
+	for i in range(count):
+		modules[i].add_resource(allotted[i])

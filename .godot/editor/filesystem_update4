@@ -1,3 +1,8 @@
-res://Scenes/Main.tscn
-res://Scenes/Pickups/Fuel.tscn
-res://Scenes/Lander.tscn
+res://Scripts/Lander.gd
+res://Scripts/Modules/LanderModule.gd
+res://Scripts/Modules/Engine.gd
+res://Scripts/Modules/Gun.gd
+res://Scenes/Pickups/Ammo.tscn
+res://Scenes/test.tscn
+res://Scenes/Levels/level_0.tscn
+res://Scripts/Level.gd

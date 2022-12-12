@@ -83,3 +83,15 @@ func _process(delta):
 
 func capacity_str():
 	return "%.2f %%" % [tank_level_ratio*100.]
+	
+func get_resource_level():
+	return tank_level
+	
+func get_resource_max():
+	return tank_capacity
+	
+func get_resource_delta():
+	return tank_capacity-tank_level
+
+func add_resource(amount):
+	tank_level += amount

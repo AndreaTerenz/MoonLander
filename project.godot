@@ -22,17 +22,22 @@ _global_script_classes=[{
 "base": "LanderModule",
 "class": &"LanderEngine",
 "language": &"GDScript",
-"path": "res://Scripts/Engine.gd"
+"path": "res://Scripts/Modules/Engine.gd"
 }, {
 "base": "LanderModule",
 "class": &"LanderGun",
 "language": &"GDScript",
-"path": "res://Scripts/Gun.gd"
+"path": "res://Scripts/Modules/Gun.gd"
 }, {
 "base": "Node2D",
 "class": &"LanderModule",
 "language": &"GDScript",
-"path": "res://Scripts/LanderModule.gd"
+"path": "res://Scripts/Modules/LanderModule.gd"
+}, {
+"base": "Node2D",
+"class": &"Level",
+"language": &"GDScript",
+"path": "res://Scripts/Level.gd"
 }, {
 "base": "Area2D",
 "class": &"Pickup",
@@ -45,13 +50,14 @@ _global_script_class_icons={
 "LanderEngine": "",
 "LanderGun": "",
 "LanderModule": "",
+"Level": "",
 "Pickup": ""
 }
 
 [application]
 
 config/name="MoonLander"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/Sandbox.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
