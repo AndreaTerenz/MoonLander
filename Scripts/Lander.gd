@@ -1,15 +1,41 @@
 class_name Lander
 extends RigidBody2D
 
+enum MODE {
+	NORMAL,
+	DOCKING,
+	DOCKED
+}
+
 signal engine_added(eng)
 signal gun_added(gun)
+signal entered_harbor(harb)
+signal docking_start
+signal docked
+signal undocked
+signal left_harbor(harb)
+signal mode_changed(m)
+
+@export_range(10., 900, .01)
+var docking_speed := 90.
 
 @onready var crosshair : Sprite2D = %Crosshair
 
 var engines : Array[LanderEngine] = []
 var guns : Array[LanderGun] = []
+var mode := MODE.NORMAL :
+	get:
+		return mode
+	set(newMode):
+		_on_mode_changed(newMode)
+		
+		mode = newMode
+		mode_changed.emit(mode)
+var harbor_target : Node2D = null
 
 func _ready():
+	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
+	
 	for kid in get_children():
 		if kid is LanderModule:
 			kid.setup(self)
@@ -21,6 +47,21 @@ func _ready():
 	
 	Globals.set_lander(self)
 	
+func _physics_process(delta):
+	if mode != MODE.DOCKING:
+		return
+		
+	var ht_pos = harbor_target.global_position
+	
+	rotation = lerp_angle(rotation, 0., .1)
+	
+	var dir := (ht_pos - global_position).normalized()
+	var coll = move_and_collide(dir * docking_speed * delta)
+	
+	if (coll != null) or (ht_pos.distance_to(global_position) < .001):
+		docked.emit()
+		mode = MODE.DOCKED
+
 func add_engine(e: LanderEngine):
 	if not e in engines:
 		engines.append(e)
@@ -80,4 +121,22 @@ func collect_resource(initial_amount : float, modules: Array):
 	for i in range(count):
 		modules[i].add_resource(allotted[i])
 		
+func _on_mode_changed(newMode: MODE):
+	if (newMode == MODE.DOCKING):
+		linear_velocity *= 0.
+	
+	freeze = (newMode == MODE.DOCKING)
+	
+	for e in engines:
+		e.enabled = not (newMode == MODE.DOCKING)
+		
+func enter_harbor(h: Harbor):
+	entered_harbor.emit(h)
+		
+func leave_harbor(h: Harbor):
+	left_harbor.emit(h)
 
+func start_docking(h: Harbor):
+	mode = MODE.DOCKING
+	harbor_target = h.target
+	docking_start.emit()

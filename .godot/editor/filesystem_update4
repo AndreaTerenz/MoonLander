@@ -4,3 +4,6 @@ res://Scenes/Sandbox.tscn
 res://Scenes/Lander.tscn
 res://Scenes/UI.tscn
 res://Scripts/Modules/Gun.gd
+res://Scripts/Harbor.gd
+res://Scripts/Autoloads/Utils.gd
+res://Scripts/Lander.gd

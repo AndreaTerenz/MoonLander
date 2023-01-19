@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsmo7jj02jh3s"]
+[gd_scene load_steps=10 format=3 uid="uid://bsmo7jj02jh3s"]
 
 [ext_resource type="Texture2D" uid="uid://bpca6ipmbgptr" path="res://icon.svg" id="1_660rl"]
 [ext_resource type="PackedScene" uid="uid://qp1usuvfujom" path="res://Scenes/Lander.tscn" id="1_puq72"]
 [ext_resource type="PackedScene" uid="uid://wu1r2spn1kcr" path="res://Scenes/Pickups/Fuel.tscn" id="3_c2imb"]
 [ext_resource type="PackedScene" uid="uid://cast2ilxpqv51" path="res://Scenes/Pickups/Ammo.tscn" id="4_ncjfd"]
+[ext_resource type="Script" path="res://Scripts/Harbor.gd" id="5_nhdrh"]
 
 [sub_resource type="GDScript" id="GDScript_iyksl"]
 script/source = "extends Node2D
@@ -32,9 +33,6 @@ fill_to = Vector2(0.5, 0)
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_iyksl")
 
-[node name="Lander" parent="." instance=ExtResource("1_puq72")]
-position = Vector2(481, 66)
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 0.8
 scroll_base_scale = Vector2(0.8, 0.8)
@@ -51,6 +49,9 @@ offset_bottom = 2165.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_660rl")
+
+[node name="Lander" parent="." instance=ExtResource("1_puq72")]
+position = Vector2(1875, 269)
 
 [node name="Fuel" parent="." instance=ExtResource("3_c2imb")]
 position = Vector2(1221, 666)
@@ -108,30 +109,36 @@ texture = ExtResource("1_660rl")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Env/StaticBody2D5"]
 polygon = PackedVector2Array(63, -60.2, 63, -57.7, 64, -56.4, 64, 56.2, 62.4, 61, 60.6, 61, 56.4, 64, -56.8, 64, -63, 60.1, -63, 57.7, -64, 56.4, -64, -55.4, -60.2, -63, -57.5, -63, -55.6, -64, 55.4, -64)
 
-[node name="Harbor" type="StaticBody2D" parent="Env"]
-position = Vector2(2481, 658)
-scale = Vector2(4.90527, 0.917346)
+[node name="Harbor" type="Area2D" parent="Env" node_paths=PackedStringArray("target")]
+position = Vector2(2481, 464)
+scale = Vector2(19.44, 13.4)
+gravity_point = true
+script = ExtResource("5_nhdrh")
+target = NodePath("Target")
 
-[node name="Icon" type="Sprite2D" parent="Env/Harbor"]
-texture = ExtResource("1_660rl")
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Env/Harbor"]
-polygon = PackedVector2Array(63, -60.2, 63, -57.7, 64, -56.4, 64, 56.2, 62.4, 61, 60.6, 61, 56.4, 64, -56.8, 64, -63, 60.1, -63, 57.7, -64, 56.4, -64, -55.4, -60.2, -63, -57.5, -63, -55.6, -64, 55.4, -64)
-metadata/_edit_lock_ = true
-
-[node name="Area2D" type="Area2D" parent="Env/Harbor"]
-position = Vector2(0, -211.48)
-scale = Vector2(3.96308, 14.6074)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Env/Harbor/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Env/Harbor"]
 shape = SubResource("RectangleShape2D_ncr4b")
 
-[node name="Sprite2D" type="Sprite2D" parent="Env/Harbor/Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Env/Harbor"]
 position = Vector2(0, 0.149253)
 scale = Vector2(0.28694, 0.314832)
 texture = SubResource("GradientTexture2D_u2mqq")
+
+[node name="Target" type="Node2D" parent="Env/Harbor"]
+position = Vector2(0, 10.0746)
+scale = Vector2(1, 1)
+
+[node name="HarborStaticBody" type="StaticBody2D" parent="Env/Harbor"]
+position = Vector2(0, 14.4776)
+scale = Vector2(0.252329, 0.0684585)
+
+[node name="Icon" type="Sprite2D" parent="Env/Harbor/HarborStaticBody"]
+texture = ExtResource("1_660rl")
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Env/Harbor/HarborStaticBody"]
+polygon = PackedVector2Array(63, -60.2, 63, -57.7, 64, -56.4, 64, 56.2, 62.4, 61, 60.6, 61, 56.4, 64, -56.8, 64, -63, 60.1, -63, 57.7, -64, 56.4, -64, -55.4, -60.2, -63, -57.5, -63, -55.6, -64, 55.4, -64)
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="Env"]
 position = Vector2(4475, 517)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cesqqwhxmq6a6"]
+[gd_scene load_steps=9 format=3 uid="uid://cesqqwhxmq6a6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxu3h"]
 bg_color = Color(0.384314, 0.384314, 0.384314, 1)
@@ -137,6 +137,33 @@ func _process(delta):
 	_sample_count += 1
 "
 
+[sub_resource type="GDScript" id="GDScript_db38d"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if not Globals.lander:
+		await Globals.lander_set
+	
+	visible = false
+	
+	Globals.lander.entered_harbor.connect(
+		func (h):
+			visible = true
+	)
+	
+	Globals.lander.left_harbor.connect(
+		func (h):
+			visible = false
+	)
+	
+	Globals.lander.docking_start.connect(
+		func ():
+			visible = false
+	)
+"
+
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -147,9 +174,11 @@ grow_vertical = 2
 theme = SubResource("Theme_s4klc")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 270.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
@@ -158,6 +187,7 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 40
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
@@ -178,61 +208,60 @@ layout_mode = 2
 columns = 2
 script = SubResource("GDScript_e7dpa")
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 0
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -270.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_constants/separation = 40
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer2/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_p4gym")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer2"]
 layout_mode = 2
 alignment = 1
 script = SubResource("GDScript_afe4x")
 
-[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Velocity:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Vel_X_Label" type="Label" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "0 m/s"
-horizontal_alignment = 1
-
-[node name="Vel_Y_Label" type="Label" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Vel_X_Label" type="Label" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 m/s"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Vel_Y_Label" type="Label" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 m/s"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Roll:"
 
-[node name="Roll_Label" type="Label" parent="MarginContainer2/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Roll_Label" type="Label" parent="MarginContainer/VBoxContainer2/PanelContainer2/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "0 °/s"
 horizontal_alignment = 1
+
+[node name="HarborTooltip" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p4gym")
+script = SubResource("GDScript_db38d")
+
+[node name="Label" type="Label" parent="MarginContainer/HarborTooltip"]
+layout_mode = 2
+text = "Dock with [H]"

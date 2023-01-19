@@ -7,7 +7,7 @@ func _ready() -> void:
 		layers.append(ProjectSettings.get_setting("layer_names/2d_physics/layer_%d" % i))
 
 func get_layer_bit(name: String):
-	return layers.find(name)
+	return layers.find(name)+1
 	
 func get_layer_bit_in_object(obj, name: String) -> bool:
 	return obj.get_collision_layer_value(get_layer_bit(name))
