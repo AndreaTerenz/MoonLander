@@ -8,52 +8,6 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "RigidBody2D",
-"class": &"Bullet",
-"language": &"GDScript",
-"path": "res://Scripts/Bullet.gd"
-}, {
-"base": "RigidBody2D",
-"class": &"Lander",
-"language": &"GDScript",
-"path": "res://Scripts/Lander.gd"
-}, {
-"base": "LanderModule",
-"class": &"LanderEngine",
-"language": &"GDScript",
-"path": "res://Scripts/Modules/Engine.gd"
-}, {
-"base": "LanderModule",
-"class": &"LanderGun",
-"language": &"GDScript",
-"path": "res://Scripts/Modules/Gun.gd"
-}, {
-"base": "Node2D",
-"class": &"LanderModule",
-"language": &"GDScript",
-"path": "res://Scripts/Modules/LanderModule.gd"
-}, {
-"base": "Node2D",
-"class": &"Level",
-"language": &"GDScript",
-"path": "res://Scripts/Level.gd"
-}, {
-"base": "Area2D",
-"class": &"Pickup",
-"language": &"GDScript",
-"path": "res://Scripts/Pickup.gd"
-}]
-_global_script_class_icons={
-"Bullet": "",
-"Lander": "",
-"LanderEngine": "",
-"LanderGun": "",
-"LanderModule": "",
-"Level": "",
-"Pickup": ""
-}
-
 [application]
 
 config/name="MoonLander"
@@ -74,6 +28,10 @@ window/size/viewport_height=768
 window/size/resizable=false
 window/size/extend_to_title=true
 mouse_cursor/custom_image="res://Assets/crosshair.png"
+
+[editor]
+
+export/convert_text_resources_to_binary=true
 
 [input]
 

@@ -42,16 +42,7 @@ func _process(delta):
 		var b : Bullet = bullet_scn.instantiate()
 		b.add_collision_exception_with(parent_ship)
 		
-		var target_dist = global_position.distance_squared_to(target)
-		var angle = rotation
-		
-		var angle_delta = remap(randf(), 0., 1., -1., 1.) * max_spread/2. * PI/3.
-		angle += angle_delta
-		
-		target.x = target_dist * cos(angle)
-		target.y = target_dist * sin(angle)
-		
-		b.shoot(target, muzzle_velocity, muzzle.global_position, get_tree().root, parent_ship.linear_velocity)
+		b.shoot(target, muzzle_velocity, muzzle.global_position, max_spread, get_tree().root, parent_ship.linear_velocity)
 		current_ammo_count -= 1
 		
 		if current_ammo_count <= 0:
@@ -60,9 +51,7 @@ func _process(delta):
 		timer.start(1. / rps)
 		
 func can_shoot():
-	enabled = enabled and (current_ammo_count > 0)
-	
-	if not enabled:
+	if not enabled or (current_ammo_count <= 0):
 		return false
 		
 	if autofire:
@@ -78,3 +67,6 @@ func get_resource_max():
 	
 func get_resource_delta():
 	return max_ammo-current_ammo_count
+	
+func add_resource(amount):
+	current_ammo_count += amount

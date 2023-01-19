@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
 [ext_resource type="PackedScene" uid="uid://dudvkm16je5nc" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
-[ext_resource type="PackedScene" uid="uid://b73djaua5h7l6" path="res://Scenes/Engine.tscn" id="3_acvr4"]
-[ext_resource type="PackedScene" uid="uid://ctm8dcvxvhoq0" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
+[ext_resource type="PackedScene" path="res://Scenes/Engine.tscn" id="3_acvr4"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
 [ext_resource type="PackedScene" uid="uid://cesqqwhxmq6a6" path="res://Scenes/UI.tscn" id="5_k18oc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
@@ -78,13 +78,7 @@ max_thrust = 400.0
 acceleration = 0.4
 
 [node name="Gun" parent="." instance=ExtResource("4_uwbsx")]
-muzzle_velocity = null
-autofire = null
 rps = 201.0
-max_spread = null
-max_ammo = null
-bullet_scn = null
-enabled = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

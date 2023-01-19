@@ -1,7 +1,8 @@
-TileMap
 Sprite2D
 CollisionShape2D
 Area2D
+Node2D
+TileMap
 TextureRect
 ParallaxBackground
 ParallaxLayer
@@ -21,7 +22,6 @@ RigidBody2D
 Camera2D
 SubViewport
 SubViewportContainer
-Node2D
 ScrollContainer
 Line2D
 Control

@@ -16,5 +16,3 @@ func _process(delta):
 
 [node name="level_0" type="Node2D"]
 script = SubResource("GDScript_c5q6q")
-next_level = null
-prev_level = null

@@ -79,3 +79,5 @@ func collect_resource(initial_amount : float, modules: Array):
 			
 	for i in range(count):
 		modules[i].add_resource(allotted[i])
+		
+
