@@ -4,16 +4,18 @@ extends RigidBody2D
 enum MODE {
 	NORMAL,
 	DOCKING,
-	DOCKED
+	DOCKED,
 }
 
 signal engine_added(eng)
 signal gun_added(gun)
+
 signal entered_harbor(harb)
-signal docking_start
-signal docked
-signal undocked
+signal docking_start(harb)
+signal docked(harb)
+signal undocked(harb)
 signal left_harbor(harb)
+
 signal mode_changed(m)
 
 @export_range(10., 900, .01)
@@ -31,6 +33,7 @@ var mode := MODE.NORMAL :
 		
 		mode = newMode
 		mode_changed.emit(mode)
+var current_harbor : Harbor = null
 var harbor_target : Node2D = null
 
 func _ready():
@@ -59,8 +62,20 @@ func _physics_process(delta):
 	var coll = move_and_collide(dir * docking_speed * delta)
 	
 	if (coll != null) or (ht_pos.distance_to(global_position) < .001):
-		docked.emit()
+		docked.emit(current_harbor)
 		mode = MODE.DOCKED
+
+func _input(_event):
+	if Input.is_action_just_pressed("dock") and current_harbor != null:
+		match mode:
+			MODE.NORMAL:
+				start_docking()
+			MODE.DOCKING:
+				pass
+			MODE.DOCKED:
+				mode = MODE.NORMAL
+				
+				undocked.emit(current_harbor)
 
 func add_engine(e: LanderEngine):
 	if not e in engines:
@@ -125,18 +140,21 @@ func _on_mode_changed(newMode: MODE):
 	if (newMode == MODE.DOCKING):
 		linear_velocity *= 0.
 	
-	freeze = (newMode == MODE.DOCKING)
+	freeze = (newMode != MODE.NORMAL)
 	
 	for e in engines:
-		e.enabled = not (newMode == MODE.DOCKING)
+		e.enabled = not (newMode != MODE.NORMAL)
 		
 func enter_harbor(h: Harbor):
 	entered_harbor.emit(h)
+	current_harbor = h
 		
 func leave_harbor(h: Harbor):
-	left_harbor.emit(h)
+	if h == current_harbor:
+		left_harbor.emit(h)
+		current_harbor = null
 
-func start_docking(h: Harbor):
+func start_docking():
 	mode = MODE.DOCKING
-	harbor_target = h.target
-	docking_start.emit()
+	harbor_target = current_harbor.target
+	docking_start.emit(current_harbor)

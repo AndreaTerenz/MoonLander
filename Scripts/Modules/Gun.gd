@@ -10,6 +10,7 @@ signal out_of_ammo(gun)
 # rounds per second
 @export_range(0.1, 1000, 0.1) var rps := 5.
 @export_range(0., 1., .01) var max_spread : float = .1
+@export_range(.01, 1., .01) var bullet_vel_randomness : float = .1
 @export var max_ammo := 1000.
 @export var bullet_scn = preload("res://Scenes/bullet.tscn")
 
@@ -42,7 +43,7 @@ func _process(delta):
 		var b : Bullet = bullet_scn.instantiate()
 		b.add_collision_exception_with(parent_ship)
 		
-		b.shoot(target, muzzle_velocity, muzzle.global_position, max_spread, get_tree().root, parent_ship.linear_velocity)
+		b.shoot(target, muzzle_velocity, muzzle.global_position, max_spread, bullet_vel_randomness, get_tree().root)
 		current_ammo_count -= 1
 		
 		if current_ammo_count <= 0:

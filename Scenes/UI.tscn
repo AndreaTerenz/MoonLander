@@ -150,18 +150,19 @@ func _ready():
 	
 	Globals.lander.entered_harbor.connect(
 		func (h):
-			visible = true
+			show()
 	)
 	
 	Globals.lander.left_harbor.connect(
 		func (h):
-			visible = false
+			hide()
 	)
 	
 	Globals.lander.docking_start.connect(
 		func ():
-			visible = false
+			hide()
 	)
+
 "
 
 [node name="UI" type="Control"]

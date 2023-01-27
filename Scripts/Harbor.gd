@@ -13,8 +13,6 @@ var enabled : bool :
 		monitorable = val
 		monitoring = val
 
-var lander_in := false
-
 func _ready():
 	enabled = start_enabled
 	collision_layer *= 0
@@ -26,17 +24,11 @@ func _ready():
 	body_entered.connect(
 		func (body):
 			if body == Globals.lander:
-				lander_in = true
 				Globals.lander.enter_harbor(self)
 	)
 
 	body_exited.connect(
 		func (body):
 			if body == Globals.lander:
-				lander_in = false
 				Globals.lander.leave_harbor(self)
 	)
-	
-func _input(event):
-	if Input.is_action_just_pressed("dock") and lander_in:
-		Globals.lander.start_docking(self)

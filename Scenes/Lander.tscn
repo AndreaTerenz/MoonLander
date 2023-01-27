@@ -79,6 +79,7 @@ acceleration = 0.4
 
 [node name="Gun" parent="." instance=ExtResource("4_uwbsx")]
 rps = 201.0
+bullet_vel_randomness = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

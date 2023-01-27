@@ -126,7 +126,6 @@ texture = SubResource("GradientTexture2D_u2mqq")
 
 [node name="Target" type="Node2D" parent="Env/Harbor"]
 position = Vector2(0, 10.0746)
-scale = Vector2(1, 1)
 
 [node name="HarborStaticBody" type="StaticBody2D" parent="Env/Harbor"]
 position = Vector2(0, 14.4776)
