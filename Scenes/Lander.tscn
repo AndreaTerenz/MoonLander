@@ -1,32 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://qp1usuvfujom"]
+[gd_scene load_steps=9 format=3 uid="uid://qp1usuvfujom"]
 
 [ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
+[ext_resource type="Texture2D" uid="uid://ddk4cbv2b2jot" path="res://Assets/Sprites/lander.png" id="2_6pvtt"]
 [ext_resource type="PackedScene" uid="uid://dudvkm16je5nc" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
 [ext_resource type="PackedScene" path="res://Scenes/Engine.tscn" id="3_acvr4"]
 [ext_resource type="PackedScene" uid="uid://h4ih8l256h44" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
 [ext_resource type="PackedScene" uid="uid://cesqqwhxmq6a6" path="res://Scenes/UI.tscn" id="5_k18oc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
-radius = 19.0
-height = 68.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_5geok"]
+radius = 52.345
 
-[sub_resource type="SphereMesh" id="SphereMesh_yswy8"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5psxv"]
+radius = 21.0
+height = 130.0
 
 [node name="Lander" type="RigidBody2D"]
 collision_layer = 3
 mass = 1.2
+center_of_mass_mode = 1
 angular_damp = 1.0
 script = ExtResource("1_pxt74")
 
+[node name="MainSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 16)
+texture = ExtResource("2_6pvtt")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_v8fb4")
+rotation = 3.14159
+shape = SubResource("CircleShape2D_5geok")
 debug_color = Color(0.486275, 0.701961, 0, 0.419608)
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(0.6, 0.6, 0.6, 1)
-scale = Vector2(58.0658, 34)
-mesh = SubResource("SphereMesh_yswy8")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 60)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_5psxv")
+debug_color = Color(0.486275, 0.701961, 0, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.7, 0.7)
@@ -35,43 +44,43 @@ zoom = Vector2(0.7, 0.7)
 unique_name_in_owner = true
 
 [node name="EngineUp" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(0, 20)
+position = Vector2(0, 72)
 action = "thrust_up"
 max_thrust = 800.0
 max_tank_consumption = 8.0
 
 [node name="EngineRoll_R_1" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(-29, -16)
+position = Vector2(-50, -15)
 action = "roll_right"
 thrust_vec_override = Vector2(0, 1)
 max_thrust = 80.0
 
 [node name="EngineRoll_L_1" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(29, -16)
+position = Vector2(50, -15)
 action = "roll_left"
 thrust_vec_override = Vector2(0, 1)
 max_thrust = 80.0
 
 [node name="EngineRoll_R_2" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(29, 16)
+position = Vector2(50, 15)
 action = "roll_right"
 thrust_vec_override = Vector2(0, -1)
 max_thrust = 80.0
 
 [node name="EngineRoll_L_2" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(-29, 16)
+position = Vector2(-50, 15)
 action = "roll_left"
 thrust_vec_override = Vector2(0, -1)
 max_thrust = 80.0
 
 [node name="EngineLeft" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(-35, 0)
+position = Vector2(-55, 0)
 action = "thrust_right"
 max_thrust = 400.0
 acceleration = 0.4
 
 [node name="EngineRight" parent="." instance=ExtResource("3_acvr4")]
-position = Vector2(35, 1)
+position = Vector2(55, 0)
 action = "thrust_left"
 max_thrust = 400.0
 acceleration = 0.4
@@ -83,3 +92,4 @@ bullet_vel_randomness = 0.2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("5_k18oc")]
+visible = false

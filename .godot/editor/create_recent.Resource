@@ -1,1 +1,0 @@
-AmmoResource (AmmoResource.gd)

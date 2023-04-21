@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cesqqwhxmq6a6"]
+[gd_scene load_steps=10 format=3 uid="uid://cesqqwhxmq6a6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxu3h"]
 bg_color = Color(0.384314, 0.384314, 0.384314, 1)
@@ -18,6 +18,15 @@ corner_radius_bottom_left = 4
 [sub_resource type="Theme" id="Theme_s4klc"]
 ProgressBar/styles/background = SubResource("StyleBoxFlat_wxu3h")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_8b4rt")
+
+[sub_resource type="GDScript" id="GDScript_apx67"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	visible = true
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4gym"]
 bg_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
@@ -173,6 +182,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_s4klc")
+script = SubResource("GDScript_apx67")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
