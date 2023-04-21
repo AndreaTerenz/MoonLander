@@ -26,9 +26,9 @@ enum ENGINE_MODE {
 
 var thrust_ratio := 0.
 var tank_level = tank_capacity
-var tank_level_ratio :
+var tank_level_ratio : float :
 	get:
-		return tank_level/tank_capacity
+		return tank_level/float(tank_capacity)
 var tank_level_missing :
 	get:
 		return tank_capacity-tank_level
@@ -57,7 +57,7 @@ func get_thrust_ratio():
 	
 	return 0.
 	
-func can_run():
+func can_run() -> bool:
 	return (action != "") and tank_level > 0 and enabled
 
 func _process(delta):

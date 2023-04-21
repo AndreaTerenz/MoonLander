@@ -149,17 +149,17 @@ func _ready():
 	visible = false
 	
 	Globals.lander.entered_harbor.connect(
-		func (h):
+		func (_h):
 			show()
 	)
 	
 	Globals.lander.left_harbor.connect(
-		func (h):
+		func (_h):
 			hide()
 	)
 	
 	Globals.lander.docking_start.connect(
-		func ():
+		func (_h):
 			hide()
 	)
 

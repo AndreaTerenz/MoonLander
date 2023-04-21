@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://h4ih8l256h44"]
 
 [ext_resource type="Script" path="res://Scripts/Modules/Gun.gd" id="1_5nnuf"]
 [ext_resource type="Texture2D" uid="uid://bpca6ipmbgptr" path="res://icon.svg" id="1_bg8yx"]

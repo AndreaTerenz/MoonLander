@@ -109,12 +109,11 @@ texture = ExtResource("1_660rl")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Env/StaticBody2D5"]
 polygon = PackedVector2Array(63, -60.2, 63, -57.7, 64, -56.4, 64, 56.2, 62.4, 61, 60.6, 61, 56.4, 64, -56.8, 64, -63, 60.1, -63, 57.7, -64, 56.4, -64, -55.4, -60.2, -63, -57.5, -63, -55.6, -64, 55.4, -64)
 
-[node name="Harbor" type="Area2D" parent="Env" node_paths=PackedStringArray("target")]
+[node name="Harbor" type="Area2D" parent="Env"]
 position = Vector2(2481, 464)
 scale = Vector2(19.44, 13.4)
 gravity_point = true
 script = ExtResource("5_nhdrh")
-target = NodePath("Target")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Env/Harbor"]
 shape = SubResource("RectangleShape2D_ncr4b")

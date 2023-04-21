@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Lander.gd" id="1_pxt74"]
 [ext_resource type="PackedScene" uid="uid://dudvkm16je5nc" path="res://Scenes/crosshair.tscn" id="2_h5om2"]
 [ext_resource type="PackedScene" path="res://Scenes/Engine.tscn" id="3_acvr4"]
-[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
+[ext_resource type="PackedScene" uid="uid://h4ih8l256h44" path="res://Scenes/Gun.tscn" id="4_uwbsx"]
 [ext_resource type="PackedScene" uid="uid://cesqqwhxmq6a6" path="res://Scenes/UI.tscn" id="5_k18oc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8fb4"]
@@ -29,7 +29,6 @@ scale = Vector2(58.0658, 34)
 mesh = SubResource("SphereMesh_yswy8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 zoom = Vector2(0.7, 0.7)
 
 [node name="Crosshair" parent="." instance=ExtResource("2_h5om2")]

@@ -2,9 +2,12 @@ class_name Harbor
 extends Area2D
 
 @export
-var target : Node2D = $Target
+var target_path : NodePath = "Target"
 @export
 var start_enabled := true
+
+@onready
+var target := get_node(target_path)
 
 var enabled : bool :
 	get:

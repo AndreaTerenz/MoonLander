@@ -1,4 +1,9 @@
+res://Scenes/Gun.tscn
+res://Scripts/Modules/Gun.gd
+res://Scripts/Autoloads/Utils.gd
 res://Scenes/Sandbox.tscn
 res://Scenes/Lander.tscn
 res://Scenes/UI.tscn
 res://Scenes/Pickups/Ammo.tscn
+res://Scenes/Levels/level_0.tscn
+res://Scripts/Bullet.gd

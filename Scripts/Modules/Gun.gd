@@ -25,8 +25,6 @@ var ammo_missing :
 
 func setup(p: Lander):
 	super.setup(p)
-	# WHY DO I NEED THIS?????
-	bullet_scn = preload("res://Scenes/bullet.tscn")
 	
 	parent_ship.add_gun(self)
 	
@@ -36,14 +34,18 @@ func setup(p: Lander):
 	add_child(timer)
 
 func _process(delta):
-	var target = get_global_mouse_position()
+	var mouse_pos = get_global_mouse_position()
+	var target = Utils.get_furthest(global_position, mouse_pos, muzzle.global_position)
+	
 	look_at(target)
 	
-	if can_shoot():
+	if can_shoot() and target == mouse_pos:
 		var b : Bullet = bullet_scn.instantiate()
-		b.add_collision_exception_with(parent_ship)
+		add_child(b)
 		
-		b.shoot(target, muzzle_velocity, muzzle.global_position, max_spread, bullet_vel_randomness, get_tree().root)
+		b.add_collision_exception_with(parent_ship)
+		b.shoot(target, muzzle_velocity, muzzle.global_position, max_spread, bullet_vel_randomness)
+		
 		current_ammo_count -= 1
 		
 		if current_ammo_count <= 0:
